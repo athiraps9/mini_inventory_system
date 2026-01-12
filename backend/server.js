@@ -20,6 +20,16 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.get("/", (req, res) => {
+  res.send("Mini Inventory Backend is running 🚀");
+});
+
+app.get("/api", (req, res) => {
+  res.send("API is working");
+});
+
+
 // Routes
 app.use("/api/products", productRoutes);
 
