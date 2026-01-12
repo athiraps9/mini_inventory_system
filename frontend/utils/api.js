@@ -1,18 +1,33 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://mini-inventory-system.vercel.app/api' || 'http://localhost:3000/',
+  baseURL:
+    process.env.NEXT_PUBLIC_API_URL ||
+    (typeof window !== "undefined" && window.location.hostname !== "localhost"
+      ? "https://mini-inventory-system.vercel.app/api"
+      : "http://localhost:5000/api"),
+
+  
+    headers: {
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache"
+  }
 });
 
 export const productApi = {
-  getProducts: (page = 1, limit = 10, search = '') => 
-    api.get(`/products?page=${page}&limit=${limit}&search=${search}`),
+  
+  getProducts: (page = 1, limit = 10, search = '') => {
+   
+ 
+    
+    api.get(`/products?page=${page}&limit=${limit}&search=${search}`) }, 
   
   getProduct: (id) => 
     api.get(`/products/${id}`),
   
   getStats: () => 
     api.get('/products/stats'),
+
   
   createProduct: (data) => 
     api.post('/products', data),

@@ -11,8 +11,19 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+app.set("etag", false);   
+
+app.use((req, res, next) => {
+  res.setHeader("Cache-Control", "no-store");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  next();
+});
+
+
 // Routes
 app.use('/api/products', productRoutes);
+
 
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI)
