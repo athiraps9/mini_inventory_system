@@ -3,6 +3,7 @@ const router = express.Router();
 const Product = require('../models/Product');
 
 // GET /products - Get products with pagination and search
+
 router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -98,5 +99,10 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+router.get('/test',(req,res)=>{
+
+  res.send("<h1>im okay</h1>");
+})
 
 module.exports = router;
