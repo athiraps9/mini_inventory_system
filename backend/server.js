@@ -18,10 +18,14 @@ app.use('/api/products', productRoutes);
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Successfully connected to MongoDB.');
-    app.listen(PORT, () => {
-      console.log(`Server is running on port: ${PORT}`);
-    });
+    if (process.env.NODE_ENV !== 'production') {
+      app.listen(PORT, () => {
+        console.log(`Server is running on port: ${PORT}`);
+      });
+    }
   })
   .catch(err => {
     console.error('Connection error', err.message);
   });
+
+module.exports = app;
