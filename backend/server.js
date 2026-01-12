@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 
 
 app.get("/", (req, res) => {
-  res.send("Mini Inventory Backend is running 🚀");
+  res.send("Mini Inventory Backend is running ");
 });
 
 app.get("/api", (req, res) => {
